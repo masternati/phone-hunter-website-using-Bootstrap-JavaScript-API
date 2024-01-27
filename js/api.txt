@@ -1,3 +1,5 @@
+https://ap1.unwiredlabs.com/v2/process.php?token=YOUR_API_KEY&radio=info& mcc=310& mnc=404& cells=21499,10791,33620,57721,46605&address=true
+
 document.getElementById('not-found').style.display='none';
 // document.getElementById('spinner').style.display='none';
 
@@ -39,7 +41,6 @@ const displayHunter = phoneHunter =>{
                 <div class="card-body">
                     <h5 class="card-title">Phone: ${phone.phone_name}</h5>
                     <p class="card-text">Brand Name: ${phone.brand}</p>
-                    <button class="btn btn-primary">Show More</button>
                 </div>
             </div>
         `
@@ -47,11 +48,4 @@ const displayHunter = phoneHunter =>{
         document.getElementById('not-found').style.display='none';
         loadSpinner(false);
     });
-};
-
-document.getElementById("search-field").addEventListener("keyup", function(event) {
-    // console.log(event.key);
-    if (event.key === 'Enter') {
-        loadPhoneHunter();
-    }
-});
+}
