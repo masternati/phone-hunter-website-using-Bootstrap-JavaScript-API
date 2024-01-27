@@ -39,7 +39,7 @@ const displayHunter = phoneHunter =>{
                 <div class="card-body">
                     <h5 class="card-title">Phone: ${phone.phone_name}</h5>
                     <p class="card-text">Brand Name: ${phone.brand}</p>
-                    <button class="btn btn-primary">Show More</button>
+                    <button type="button" onclick="loadMoreDetails('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Show More</button>
                 </div>
             </div>
         `
@@ -49,9 +49,38 @@ const displayHunter = phoneHunter =>{
     });
 };
 
+const loadMoreDetails = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+        .then(res => res.json())
+        .then(data => displayDetails(data.data));
+};
+
+const displayDetails = (phoneDetails) => {
+    console.log(phoneDetails);
+    const moreDetails = document.getElementById('display-more-details');
+    moreDetails.innerHTML = '';
+
+    const phoneModalLabel = document.getElementById('phoneModalLabel');
+    phoneModalLabel.innerText = phoneDetails.name;
+
+    const createDiv = document.createElement('div');
+    createDiv.innerHTML = `
+        <h3>Brand: ${phoneDetails.brand ? phoneDetails.brand: 'n/a'}</h3>
+        <p>Display Size: ${phoneDetails.mainFeatures.displaySize}</p>
+        <p>Mobile Memory: ${phoneDetails.mainFeatures.memory? phoneDetails.mainFeatures.memory: 'n/a'}</p>
+        <p>Release Date: ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'n/a'}</p>
+    `;
+    
+    moreDetails.appendChild(createDiv);
+};
+
+
+//display search result with Enter press
 document.getElementById("search-field").addEventListener("keyup", function(event) {
     // console.log(event.key);
     if (event.key === 'Enter') {
         loadPhoneHunter();
     }
 });
+
+// loadPhoneHunter('iphone');
