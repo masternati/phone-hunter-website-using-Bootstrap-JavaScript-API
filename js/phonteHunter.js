@@ -33,6 +33,7 @@ const displayHunter = phoneHunter =>{
     phoneHunter.data.forEach(phone => {
         const createDiv = document.createElement('div')
         createDiv.classList.add('col')
+        console.log(phone);
         createDiv.innerHTML =`
             <div class="card">
             <img src="${phone.image}" class="card-img-top h-50 w-full" alt="...">
